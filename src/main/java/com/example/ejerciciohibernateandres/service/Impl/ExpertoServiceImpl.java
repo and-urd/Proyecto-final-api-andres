@@ -5,6 +5,8 @@ import com.example.ejerciciohibernateandres.model.Experto;
 import com.example.ejerciciohibernateandres.repository.ExpertoRepository;
 import com.example.ejerciciohibernateandres.service.EtiquetaService;
 import com.example.ejerciciohibernateandres.service.ExpertoService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -50,6 +52,12 @@ public class ExpertoServiceImpl implements ExpertoService {
     public List<Experto> encontrarTodos() {
         return expertoRepository.findAll();
     }
+
+    @Override
+    public Page<Experto> encontrarTodos(Pageable pageable) {
+        return expertoRepository.findAll(pageable);
+    }
+
 
     // Recupero un experto por su Id
     @Override
