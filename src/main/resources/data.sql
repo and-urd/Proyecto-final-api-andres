@@ -22,4 +22,16 @@ INSERT INTO task_tag(id_task, id_tag) VALUES (3, 4);
 INSERT INTO task_tag(id_task, id_tag) VALUES (2, 4);
 
 
+INSERT INTO etiquetas(id, nombre) VALUES (1, "php");
+INSERT INTO etiquetas(id, nombre) VALUES (2, "java");
+INSERT INTO etiquetas(id, nombre) VALUES (3, "kotlin");
 
+INSERT INTO expertos(id, nombre, telefono, email) VALUES (1, "antonio", "666 111 111", "antonio@gmail.com");
+INSERT INTO expertos(id, nombre, telefono, email) VALUES (2, "jose", "666 222 222", "jose@gmail.com");
+INSERT INTO expertos(id, nombre, telefono, email) VALUES (3, "alberto", "666 333 333", "alberto@gmail.com");
+
+INSERT INTO experto_etiqueta(experto_id, etiqueta_id) VALUES (1, 1);
+INSERT INTO experto_etiqueta(experto_id, etiqueta_id) VALUES (1, 2);
+INSERT INTO experto_etiqueta(experto_id, etiqueta_id) VALUES (2, 1);
+INSERT INTO experto_etiqueta(experto_id, etiqueta_id) VALUES (2, 2);
+INSERT INTO experto_etiqueta(experto_id, etiqueta_id) VALUES (2, 3);
