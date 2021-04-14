@@ -2,6 +2,9 @@ package com.example.ejerciciohibernateandres.controller;
 
 import com.example.ejerciciohibernateandres.model.Etiqueta;
 import com.example.ejerciciohibernateandres.service.EtiquetaService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,15 +24,30 @@ public class EtiquetaController {
 
 
     // Encontrar todas las etiquetas
+//    @GetMapping("/etiquetas")
+//    public ResponseEntity<List<Etiqueta>> encontrarTodasEtiquetas(){
+//        List<Etiqueta> listaEtiquetas = etiquetaService.encontrarTodas();
+//        if(listaEtiquetas.isEmpty()){
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }else{
+//            return ResponseEntity.ok().body(listaEtiquetas);
+//        }
+//    }
+
+
+    // Encontrar todas las etiquetas CON PAGINACION
     @GetMapping("/etiquetas")
-    public ResponseEntity<List<Etiqueta>> encontrarTodasEtiquetas(){
-        List<Etiqueta> listaEtiquetas = etiquetaService.encontrarTodas();
+    public Page<Etiqueta> encontrarTodasEtiquetasPaginacion(@PageableDefault(size=10, page=0) Pageable pageable){
+        Page<Etiqueta> listaEtiquetas = etiquetaService.encontrarTodas(pageable);
+
         if(listaEtiquetas.isEmpty()){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return null;
         }else{
-            return ResponseEntity.ok().body(listaEtiquetas);
+            return listaEtiquetas;
         }
     }
+
+
 
     // Encuentra una etiqueta
     @GetMapping("/etiqueta/{id}")
