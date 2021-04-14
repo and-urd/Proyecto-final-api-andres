@@ -1,5 +1,7 @@
 package com.example.ejerciciohibernateandres.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +16,7 @@ public class Etiqueta {
 
     private String nombre;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "etiquetas", fetch = FetchType.EAGER)
     private List<Experto> expertos = new ArrayList<>();
 
