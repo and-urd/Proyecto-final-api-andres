@@ -23,4 +23,8 @@ public interface EtiquetaService {
     // Encontrar una etiqueta
     Optional<Etiqueta> encontrarEtiqueta(Long id);
 
+    // Borrar una etiqueta
+    Boolean borrarEtiqueta(Long id);
+
+
 }

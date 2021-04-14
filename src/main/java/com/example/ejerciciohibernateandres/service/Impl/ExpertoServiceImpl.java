@@ -34,6 +34,7 @@ public class ExpertoServiceImpl implements ExpertoService {
         }
     }
 
+    // Actualizar un experto
     @Override
     public Experto actualizarExperto(Experto experto) {
         Experto expertoActualizado = null;

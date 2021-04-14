@@ -19,42 +19,6 @@ public class EtiquetaController {
         this.etiquetaService = etiquetaService;
     }
 
-    // Crear un tag
-    @PostMapping("/etiqueta")
-    public ResponseEntity<Etiqueta> crearEtiqueta(@RequestBody Etiqueta etiqueta){
-
-        Etiqueta resultado = etiquetaService.crearEtiqueta(etiqueta);
-
-         if(resultado == null){
-             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-         }else{
-             return ResponseEntity.ok().body(resultado);
-         }
-    }
-
-    // Crear una lista de etiquetas
-    @PostMapping("/etiqueta/lista")
-    public ResponseEntity<List<Etiqueta>> crearListEtiquetas(@RequestBody List<Etiqueta> etiquetas){
-
-        List<Etiqueta> listaEtiquetas = etiquetaService.crearEtiquetas(etiquetas);
-
-        if(listaEtiquetas.isEmpty()){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }else{
-            return ResponseEntity.ok().body(listaEtiquetas);
-        }
-    }
-
-    // Actualiza etiqueta
-    @PutMapping("/etiqueta")
-    public ResponseEntity<Etiqueta> actualizaEtiqueta(@RequestBody Etiqueta etiqueta){
-        Etiqueta resultado = etiquetaService.actualizarEtiqueta(etiqueta);
-        if(etiquetaService == null){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }else{
-            return ResponseEntity.ok().body(resultado);
-        }
-    }
 
     // Encontrar todas las etiquetas
     @GetMapping("/etiquetas")
@@ -77,5 +41,60 @@ public class EtiquetaController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    // Crear un etiqueta
+    @PostMapping("/etiqueta")
+    public ResponseEntity<Etiqueta> crearEtiqueta(@RequestBody Etiqueta etiqueta){
+
+        Etiqueta resultado = etiquetaService.crearEtiqueta(etiqueta);
+
+         if(resultado == null){
+             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+         }else{
+             return ResponseEntity.ok().body(resultado);
+         }
+    }
+
+    // Actualiza etiqueta
+    @PutMapping("/etiqueta")
+    public ResponseEntity<Etiqueta> actualizaEtiqueta(@RequestBody Etiqueta etiqueta){
+        Etiqueta resultado = etiquetaService.actualizarEtiqueta(etiqueta);
+        if(etiquetaService == null){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }else{
+            return ResponseEntity.ok().body(resultado);
+        }
+    }
+
+    // Borrar una etiqueta
+    @DeleteMapping("/etiqueta/{id}")
+    public ResponseEntity<Boolean> borrarEtiqueta(@PathVariable Long id){
+
+        Boolean resultado = etiquetaService.borrarEtiqueta(id);
+        if(resultado == true){
+            return new ResponseEntity<>(HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
+
+
+
+
+    // Crear una lista de etiquetas
+    @PostMapping("/etiqueta/lista")
+    public ResponseEntity<List<Etiqueta>> crearListEtiquetas(@RequestBody List<Etiqueta> etiquetas){
+
+        List<Etiqueta> listaEtiquetas = etiquetaService.crearEtiquetas(etiquetas);
+
+        if(listaEtiquetas.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }else{
+            return ResponseEntity.ok().body(listaEtiquetas);
+        }
+    }
+
 
 }
