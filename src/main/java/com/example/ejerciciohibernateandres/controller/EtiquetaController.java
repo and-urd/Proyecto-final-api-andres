@@ -84,6 +84,18 @@ public class EtiquetaController {
         }
     }
 
+    // Actualizar etiqueta por ID
+    @PutMapping("/etiqueta/{id}")
+    public ResponseEntity<Etiqueta> actualizaEtiquetaPorId(@RequestBody Etiqueta etiqueta, @PathVariable Long id){
+        etiqueta.setId(id);
+        Etiqueta resultado = etiquetaService.actualizarEtiqueta(etiqueta);
+        if(resultado == null){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }else{
+            return ResponseEntity.ok().body(resultado);
+        }
+    }
+
     // Borrar una etiqueta
     @DeleteMapping("/etiqueta/{id}")
     public ResponseEntity<Boolean> borrarEtiqueta(@PathVariable Long id){
