@@ -87,17 +87,16 @@ public class ExpertoController {
     }
 
     // Actualizar un experto
-    //      Solo se puede actualizar los atributos que NO sean las etiquetas
     @PutMapping("/experto")
     public ResponseEntity<Experto> actualizarExperto(@RequestBody Experto experto){
 
-        // Cogemos el experto que se quiere actualizar y
-        Optional<Experto> originalExperto = expertoService.encontrarExperto(experto.getId());
-
-        //COGEMOS sus etiquetas
-        List<Etiqueta> listaEtiquetas = originalExperto.get().getEtiquetas();
-
-        experto.setEtiquetas(listaEtiquetas);
+        // Cogemos el experto que se quiere actualizar
+//        Optional<Experto> originalExperto = expertoService.encontrarExperto(experto.getId());
+//
+//        //COGEMOS sus etiquetas
+//        List<Etiqueta> listaEtiquetas = originalExperto.get().getEtiquetas();
+//
+//        experto.setEtiquetas(listaEtiquetas);
 
         Experto resultadoExperto = expertoService.actualizarExperto(experto);
         if(resultadoExperto == null){
@@ -106,4 +105,20 @@ public class ExpertoController {
             return ResponseEntity.ok().body(resultadoExperto);
         }
     }
+
+    // Actualizar un experto por su Id
+    @PutMapping("/experto/{id}")
+    public ResponseEntity<Experto> actualizarExpertoPorId(@RequestBody Experto experto, @PathVariable Long id){
+        experto.setId(id);
+
+        Experto resultadoExperto = expertoService.actualizarExperto(experto);
+        if(resultadoExperto == null){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }else{
+            return ResponseEntity.ok().body(resultadoExperto);
+        }
+    }
+
+
+
 }

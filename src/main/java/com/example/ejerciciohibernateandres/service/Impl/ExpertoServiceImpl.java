@@ -29,6 +29,14 @@ public class ExpertoServiceImpl implements ExpertoService {
     @Override
     public Experto crearExperto(Experto experto) {
         Experto expertoNuevo = null;
+
+        // Si alguna de las etiquetas NO existe en la BBDD, devuelve Null
+        for (Etiqueta etiqueta :
+                experto.getEtiquetas()) {
+            if(!etiquetaService.encontrarEtiqueta(etiqueta.getId()).isPresent())
+                return null;
+        }
+
         if(experto.getId() == null){
             return expertoRepository.save(experto);
         }else {
