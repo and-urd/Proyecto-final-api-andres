@@ -4,6 +4,9 @@ import com.example.ejerciciohibernateandres.model.Etiqueta;
 import com.example.ejerciciohibernateandres.model.Experto;
 import com.example.ejerciciohibernateandres.service.ExpertoService;
 import org.apache.coyote.Response;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,16 +36,29 @@ public class ExpertoController {
     }
 
     // Encontrar todas los expertos
-    @GetMapping("/expertos")
-    public ResponseEntity<List<Experto>> encontrarTodos(){
-        List<Experto> listaExpertos = expertoService.encontrarTodos();
+//    @GetMapping("/expertos")
+//    public ResponseEntity<List<Experto>> encontrarTodos(){
+//        List<Experto> listaExpertos = expertoService.encontrarTodos();
+//
+//        if(listaExpertos.isEmpty()){
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }else{
+//            return ResponseEntity.ok().body(listaExpertos);
+//        }
+//    }
 
+    // Encontrar todos los expertos paginados
+    @GetMapping("/expertos")
+    public Page<Experto> encontrarTodosExpertosPaginacion(@PageableDefault(size=10, page=0) Pageable pageable){
+        Page<Experto> listaExpertos = expertoService.encontrarTodos(pageable);
         if(listaExpertos.isEmpty()){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return null;
         }else{
-            return ResponseEntity.ok().body(listaExpertos);
+            return listaExpertos;
         }
     }
+
+
 
     // Encontrar un experto por su Id
     @GetMapping("/experto/{id}")
@@ -71,17 +87,16 @@ public class ExpertoController {
     }
 
     // Actualizar un experto
-    //      Solo se puede actualizar los atributos que NO sean las etiquetas
     @PutMapping("/experto")
     public ResponseEntity<Experto> actualizarExperto(@RequestBody Experto experto){
 
-        // Cogemos el experto que se quiere actualizar y
-        Optional<Experto> originalExperto = expertoService.encontrarExperto(experto.getId());
-
-        //COGEMOS sus etiquetas
-        List<Etiqueta> listaEtiquetas = originalExperto.get().getEtiquetas();
-
-        experto.setEtiquetas(listaEtiquetas);
+        // Cogemos el experto que se quiere actualizar
+//        Optional<Experto> originalExperto = expertoService.encontrarExperto(experto.getId());
+//
+//        //COGEMOS sus etiquetas
+//        List<Etiqueta> listaEtiquetas = originalExperto.get().getEtiquetas();
+//
+//        experto.setEtiquetas(listaEtiquetas);
 
         Experto resultadoExperto = expertoService.actualizarExperto(experto);
         if(resultadoExperto == null){
@@ -90,4 +105,20 @@ public class ExpertoController {
             return ResponseEntity.ok().body(resultadoExperto);
         }
     }
+
+    // Actualizar un experto por su Id
+    @PutMapping("/experto/{id}")
+    public ResponseEntity<Experto> actualizarExpertoPorId(@RequestBody Experto experto, @PathVariable Long id){
+        experto.setId(id);
+
+        Experto resultadoExperto = expertoService.actualizarExperto(experto);
+        if(resultadoExperto == null){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }else{
+            return ResponseEntity.ok().body(resultadoExperto);
+        }
+    }
+
+
+
 }

@@ -5,6 +5,8 @@ import com.example.ejerciciohibernateandres.repository.EtiquetaRepository;
 import com.example.ejerciciohibernateandres.service.EtiquetaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -61,6 +63,12 @@ public class EtiquetaServiceImpl implements EtiquetaService {
     @Override
     public List<Etiqueta> encontrarTodas() {
         return etiquetaRepository.findAll();
+    }
+
+    // Encontrar todas con paginado
+    @Override
+    public Page<Etiqueta> encontrarTodas(Pageable pageable) {
+        return etiquetaRepository.findAll(pageable);
     }
 
     // Encontrar etiqueta por su id
