@@ -1,5 +1,6 @@
 package com.example.ejerciciohibernateandres.controller;
 
+import com.example.ejerciciohibernateandres.dao.EtiquetaDAO;
 import com.example.ejerciciohibernateandres.model.Etiqueta;
 import com.example.ejerciciohibernateandres.service.EtiquetaService;
 import org.springframework.data.domain.Page;
@@ -9,8 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -18,8 +19,10 @@ import java.util.Optional;
 public class EtiquetaController {
 
     private final EtiquetaService etiquetaService;
-    public EtiquetaController(EtiquetaService etiquetaService) {
+    private final EtiquetaDAO etiquetaDAO;
+    public EtiquetaController(EtiquetaService etiquetaService, EtiquetaDAO etiquetaDAO) {
         this.etiquetaService = etiquetaService;
+        this.etiquetaDAO = etiquetaDAO;
     }
 
 
@@ -50,6 +53,7 @@ public class EtiquetaController {
 
 
     // Encuentra una etiqueta
+
     @GetMapping("/etiqueta/{id}")
     public ResponseEntity<Optional<Etiqueta>> encontrarEtiqueta(@PathVariable Long id){
         Optional<Etiqueta> resultado = etiquetaService.encontrarEtiqueta(id);
@@ -126,5 +130,27 @@ public class EtiquetaController {
         }
     }
 
+    // Recupera las etiquetas por su nombre
+//    @GetMapping("/etiqueta/nombre/{nombre}")
+//    public ResponseEntity<List<Etiqueta>> encontrarEtiquetaPorNombre(@PathVariable String nombre){
+//        List<Etiqueta> listaEtiqueta = etiquetaDAO.encontrarPorNombre(nombre);
+//        if(listaEtiqueta.isEmpty()){
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }else{
+//            return ResponseEntity.ok().body(listaEtiqueta);
+//        }
+//    }
+
+    // Filtrar por nombre
+    @GetMapping("/etiqueta")
+    public ResponseEntity<List<Etiqueta>> encontrarEtiquetaPorNombre(@RequestParam Map<String, String> parametros){
+        String nombre = parametros.get("nombre");
+        List<Etiqueta> listaEtiqueta = etiquetaDAO.encontrarPorNombre(nombre);
+        if(listaEtiqueta.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }else{
+            return ResponseEntity.ok().body(listaEtiqueta);
+        }
+    }
 
 }
