@@ -3,8 +3,7 @@ package com.example.ejerciciohibernateandres.controller;
 import com.example.ejerciciohibernateandres.dao.EtiquetaDAO;
 import com.example.ejerciciohibernateandres.model.Etiqueta;
 import com.example.ejerciciohibernateandres.service.EtiquetaService;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -142,15 +141,53 @@ public class EtiquetaController {
 //    }
 
     // Filtrar por nombre
+//    @GetMapping("/etiqueta")
+//    public ResponseEntity<List<Etiqueta>> encontrarEtiquetaPorNombre(@RequestParam Map<String, String> parametros){
+//
+//        if(parametros.containsKey("nombre")== false)
+//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//
+//        String nombre = parametros.get("nombre");
+//        List<Etiqueta> listaEtiqueta = etiquetaDAO.encontrarPorNombre(nombre);
+//        if(listaEtiqueta.isEmpty()){
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }else{
+//            return ResponseEntity.ok().body(listaEtiqueta);
+//        }
+//    }
+
+    // Filtrar por nombre con paginacion
     @GetMapping("/etiqueta")
-    public ResponseEntity<List<Etiqueta>> encontrarEtiquetaPorNombre(@RequestParam Map<String, String> parametros){
+    public Page<Etiqueta> encontrarEtiquetasPorNombrePaginacion(@RequestParam Map<String, String> parametros){
+        if(parametros.containsKey("nombre")== false)
+            return null;
+
+
+        int page = parametros.containsKey("page")? Integer.parseInt(parametros.get("page")) :0;
+        int size = parametros.containsKey("size")? Integer.parseInt(parametros.get("size")) :3;
+
         String nombre = parametros.get("nombre");
         List<Etiqueta> listaEtiqueta = etiquetaDAO.encontrarPorNombre(nombre);
         if(listaEtiqueta.isEmpty()){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return null;
         }else{
-            return ResponseEntity.ok().body(listaEtiqueta);
+            //return listaEtiqueta;
+            Pageable pageable =  PageRequest.of(page,size);
+            return listConvertToPage1(listaEtiqueta,pageable);
         }
+    }
+
+    public static <T> Page<T> listConvertToPage1(List<T> list, Pageable pageable) {
+        int start = (int) pageable.getOffset();
+        int end = (start + pageable.getPageSize()) > list.size() ? list.size() : (start + pageable.getPageSize());
+
+        try {
+            Page<T> page = new PageImpl<T>(list.subList(start, end), pageable, list.size());
+            return page;
+        }catch(Exception ex){
+            return null;
+        }
+
     }
 
 }
