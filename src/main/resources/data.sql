@@ -35,3 +35,6 @@ INSERT INTO experto_etiqueta(experto_id, etiqueta_id) VALUES (1, 2);
 INSERT INTO experto_etiqueta(experto_id, etiqueta_id) VALUES (2, 1);
 INSERT INTO experto_etiqueta(experto_id, etiqueta_id) VALUES (2, 2);
 INSERT INTO experto_etiqueta(experto_id, etiqueta_id) VALUES (2, 3);
+
+
+INSERT INTO usuarios(email, password) VALUES ("admin", "admin");
