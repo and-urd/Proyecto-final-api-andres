@@ -1,6 +1,8 @@
 package com.example.ejerciciohibernateandres.service.Impl;
 
+import com.example.ejerciciohibernateandres.dao.impl.ExpertoDAOImpl;
 import com.example.ejerciciohibernateandres.model.Etiqueta;
+import com.example.ejerciciohibernateandres.model.Experto;
 import com.example.ejerciciohibernateandres.repository.EtiquetaRepository;
 import com.example.ejerciciohibernateandres.service.EtiquetaService;
 import org.slf4j.Logger;
@@ -19,8 +21,11 @@ public class EtiquetaServiceImpl implements EtiquetaService {
     private final Logger log = LoggerFactory.getLogger (EtiquetaServiceImpl.class);
 
 
+    private final ExpertoDAOImpl expertoDAO;
+
     private final EtiquetaRepository etiquetaRepository;
-    public EtiquetaServiceImpl(EtiquetaRepository etiquetaRepository) {
+    public EtiquetaServiceImpl(ExpertoDAOImpl expertoDAO, EtiquetaRepository etiquetaRepository) {
+        this.expertoDAO = expertoDAO;
         this.etiquetaRepository = etiquetaRepository;
     }
 
@@ -81,6 +86,15 @@ public class EtiquetaServiceImpl implements EtiquetaService {
     @Override
     public Boolean borrarEtiqueta(Long id) {
         if(etiquetaRepository.existsById(id)){
+
+            // Lista de los expertos con esa etiqueta
+            List<Experto> lista = expertoDAO.encontrarConFiltros("", id, "", "");
+
+            for (Experto experto : lista) {
+                // Borramos la etiqueta de cada uno de los expertos
+                expertoDAO.borrarEtiquetaDeExperto(experto, id);
+            }
+
 
             try{
                 etiquetaRepository.deleteById(id);
