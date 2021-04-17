@@ -26,12 +26,15 @@ INSERT INTO etiquetas(id, nombre) VALUES (1, "php");
 INSERT INTO etiquetas(id, nombre) VALUES (2, "java");
 INSERT INTO etiquetas(id, nombre) VALUES (3, "kotlin");
 
-INSERT INTO expertos(id, nombre, telefono, email) VALUES (1, "antonio", "666 111 111", "antonio@gmail.com");
-INSERT INTO expertos(id, nombre, telefono, email) VALUES (2, "jose", "666 222 222", "jose@gmail.com");
-INSERT INTO expertos(id, nombre, telefono, email) VALUES (3, "alberto", "666 333 333", "alberto@gmail.com");
+INSERT INTO expertos(id, nombre, telefono, email, modalidad, estado) VALUES (1, "antonio", "666 111 111", "antonio@gmail.com", "online", "pendiente");
+INSERT INTO expertos(id, nombre, telefono, email, modalidad, estado) VALUES (2, "jose", "666 222 222", "jose@gmail.com", "presencial", "verificado");
+INSERT INTO expertos(id, nombre, telefono, email, modalidad, estado) VALUES (3, "alberto", "666 333 333", "alberto@gmail.com", "online", "verificado");
 
 INSERT INTO experto_etiqueta(experto_id, etiqueta_id) VALUES (1, 1);
 INSERT INTO experto_etiqueta(experto_id, etiqueta_id) VALUES (1, 2);
 INSERT INTO experto_etiqueta(experto_id, etiqueta_id) VALUES (2, 1);
 INSERT INTO experto_etiqueta(experto_id, etiqueta_id) VALUES (2, 2);
 INSERT INTO experto_etiqueta(experto_id, etiqueta_id) VALUES (2, 3);
+
+
+INSERT INTO usuarios(email, password) VALUES ("admin", "admin");

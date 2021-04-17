@@ -18,6 +18,10 @@ public class Experto {
 
     private String email;
 
+    private String modalidad;
+
+    private String estado;
+
     @ManyToMany
     @JoinTable(
             name="experto_etiqueta",
@@ -30,13 +34,15 @@ public class Experto {
     // constructores
     public Experto() {
     }
-    public Experto(String nombre, String telefono, String email) {
+    public Experto(String nombre, String telefono, String email, String modalidad, String estado, List<Etiqueta> etiquetas) {
         this.nombre = nombre;
         this.telefono = telefono;
         this.email = email;
+        this.modalidad = modalidad;
+        this.estado = estado;
+        this.etiquetas = etiquetas;
     }
-
-    // Getter y setter
+// Getter y setter
 
     public Long getId() {
         return id;
@@ -70,6 +76,22 @@ public class Experto {
         this.email = email;
     }
 
+    public String getModalidad() {
+        return modalidad;
+    }
+
+    public void setModalidad(String modalidad) {
+        this.modalidad = modalidad;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
     public List<Etiqueta> getEtiquetas() {
         return etiquetas;
     }
@@ -80,6 +102,7 @@ public class Experto {
 
     // método toString
 
+
     @Override
     public String toString() {
         return "Experto{" +
@@ -87,6 +110,8 @@ public class Experto {
                 ", nombre='" + nombre + '\'' +
                 ", telefono='" + telefono + '\'' +
                 ", email='" + email + '\'' +
+                ", modalidad='" + modalidad + '\'' +
+                ", estado='" + estado + '\'' +
                 ", num_etiquetas=" + etiquetas.size() +
                 '}';
     }
