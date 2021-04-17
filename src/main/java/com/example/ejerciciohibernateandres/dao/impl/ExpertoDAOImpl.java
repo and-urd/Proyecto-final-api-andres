@@ -1,6 +1,7 @@
 package com.example.ejerciciohibernateandres.dao.impl;
 
 import com.example.ejerciciohibernateandres.dao.ExpertoDAO;
+import com.example.ejerciciohibernateandres.model.Etiqueta;
 import com.example.ejerciciohibernateandres.model.Experto;
 import com.example.ejerciciohibernateandres.service.ExpertoService;
 import org.hibernate.Session;
@@ -31,7 +32,7 @@ public class ExpertoDAOImpl implements ExpertoDAO {
     }
 
     @Override
-    public List<Experto> encontrarConFiltros(String nombre, Integer etiqueta, String modalidad, String estado) {
+    public List<Experto> encontrarConFiltros(String nombre, Long etiqueta, String modalidad, String estado) {
 
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Experto> criteria = builder.createQuery(Experto.class);
@@ -42,10 +43,28 @@ public class ExpertoDAOImpl implements ExpertoDAO {
         Predicate contieneModalidad = builder.like(root.get("modalidad"), modalidad+"%");
         Predicate contieneEstado = builder.like(root.get("estado"), estado+"%");
 
+        List<Experto> listaCriteria = session.createQuery(criteria.where(builder.and(contieneNombre, contieneModalidad, contieneEstado))).getResultList();
 
+        // Filtramos de la ´listaCriteria´ los expertos que tengan la etiqueta  `etiqueta` que buscamos.
+        List<Experto> listafiltroEtiqueta = new ArrayList<>();
+        for (Experto experto :
+                listaCriteria) {
+            for (Etiqueta et :
+                    experto.getEtiquetas()) {
+                        if(etiqueta != 0) {
+                            if (et.getId() == etiqueta) listafiltroEtiqueta.add(experto);
+                        }else{
+                            // si no se ha introducido nada en el parámetro de filtro 'etiqueta'
+                            listafiltroEtiqueta.add(experto);
+                        }
+                    }
+        }
+
+
+        // ESTO ES PORQUE , no actualizar los valores en la RESPUESTA
         List<Experto> listaResultado = new ArrayList<>();
         for (Experto experto :
-                session.createQuery(criteria.where(builder.and(contieneNombre, contieneModalidad, contieneEstado))).getResultList()) {
+                listafiltroEtiqueta) {
             listaResultado.add(expertoService.encontrarExperto(experto.getId()).get());
         }
 

@@ -76,7 +76,7 @@ public class ExpertoController {
         size = parametros.containsKey("size")? Integer.parseInt(parametros.get("size")) :10;
 
         String etiqueta, nombre, modalidad, estado;
-        Integer idEtiqueta;
+        Long idEtiqueta;
         //
 //        if(parametros.containsKey("nombre")== false){
 //            nombre = "";
@@ -92,7 +92,7 @@ public class ExpertoController {
 //        }
         etiqueta = (parametros.containsKey("etiqueta")== false)?"0":parametros.get("etiqueta");
         try{
-            idEtiqueta = Integer.valueOf(etiqueta);
+            idEtiqueta = Long.valueOf(etiqueta);
         }catch(NumberFormatException ex){
             log.error("ERROR valor de la etiqueta, DEBE ser un entero: valor introducido= {}", etiqueta);
             return null;
