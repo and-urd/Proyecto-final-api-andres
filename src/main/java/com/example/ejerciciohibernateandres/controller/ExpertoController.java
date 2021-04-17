@@ -1,27 +1,33 @@
 package com.example.ejerciciohibernateandres.controller;
 
-import com.example.ejerciciohibernateandres.model.Etiqueta;
+import com.example.ejerciciohibernateandres.dao.ExpertoDAO;
 import com.example.ejerciciohibernateandres.model.Experto;
 import com.example.ejerciciohibernateandres.service.ExpertoService;
-import org.apache.coyote.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
 public class ExpertoController {
 
-    private final ExpertoService expertoService;
+    private final Logger log = LoggerFactory.getLogger (ExpertoController.class);
 
-    public ExpertoController(ExpertoService expertoService) {
+    private final ExpertoService expertoService;
+    private final ExpertoDAO expertoDAO;
+    public ExpertoController(ExpertoService expertoService, ExpertoDAO expertoDAO) {
         this.expertoService = expertoService;
+        this.expertoDAO = expertoDAO;
     }
 
     // Crear Experto
@@ -48,15 +54,99 @@ public class ExpertoController {
 //    }
 
     // Encontrar todos los expertos paginados
+//    @GetMapping("/expertos")
+//    public Page<Experto> encontrarTodosExpertosPaginacion(@PageableDefault(size=10, page=0) Pageable pageable){
+//        Page<Experto> listaExpertos = expertoService.encontrarTodos(pageable);
+//        if(listaExpertos.isEmpty()){
+//            return null;
+//        }else{
+//            return listaExpertos;
+//        }
+//    }
+
+    // Devuelve todos los expertos - Filtros: límite, página, Etiqueta, Nombre, Modalidad, Estado
     @GetMapping("/expertos")
-    public Page<Experto> encontrarTodosExpertosPaginacion(@PageableDefault(size=10, page=0) Pageable pageable){
-        Page<Experto> listaExpertos = expertoService.encontrarTodos(pageable);
-        if(listaExpertos.isEmpty()){
+    public Page<Experto> encontrarExpertoConFiltros(@RequestParam Map<String, String> parametros){
+
+        int page, size;
+        // Valores por defecto para -> page , size
+        // Si no está el parámetro `page` por defecto será 0
+        page = parametros.containsKey("page")? Integer.parseInt(parametros.get("page")) :0;
+        // Si no está el parámetro `size`, por defecto será 3
+        size = parametros.containsKey("size")? Integer.parseInt(parametros.get("size")) :10;
+
+        String etiqueta, nombre, modalidad, estado;
+        Integer idEtiqueta;
+        //
+//        if(parametros.containsKey("nombre")== false){
+//            nombre = "";
+//        }else{
+//            nombre = parametros.get("nombre");
+//        }
+        nombre = (parametros.containsKey("nombre")== false)?"":parametros.get("nombre");
+
+        //        if(parametros.containsKey("etiqueta")== false){
+//            etiqueta = "";
+//        }else{
+//            etiqueta = parametros.get("etiqueta");
+//        }
+        etiqueta = (parametros.containsKey("etiqueta")== false)?"0":parametros.get("etiqueta");
+        try{
+            idEtiqueta = Integer.valueOf(etiqueta);
+        }catch(NumberFormatException ex){
+            log.error("ERROR valor de la etiqueta, DEBE ser un entero: valor introducido= {}", etiqueta);
+            return null;
+        }
+
+        //        if(parametros.containsKey("modalidad")== false){
+//            modalidad = "";
+//        }else{
+//            modalidad = parametros.get("modalidad");
+//        }/
+        modalidad = (parametros.containsKey("modalidad")== false)?"":parametros.get("modalidad");
+
+        //        if(parametros.containsKey("estado")== false){
+//            estado = "";
+//        }else{
+//            estado = parametros.get("estado");
+//        }
+        estado = (parametros.containsKey("estado")== false)?"":parametros.get("estado");
+
+        List<Experto> listaExperto = expertoDAO.encontrarConFiltros(nombre, idEtiqueta, modalidad, estado);
+        if(listaExperto.isEmpty()){
             return null;
         }else{
-            return listaExpertos;
+            Pageable pageable = PageRequest.of(page, size);
+            return convertirListAPage(listaExperto, pageable);
+        }
+
+
+    }
+
+
+
+
+    // Método para convertir una Lista en un objeto Pageable
+    public static <T> Page<T> convertirListAPage(List<T> list, Pageable pageable) {
+        int inicio = (int) pageable.getOffset();
+        int fin = (inicio + pageable.getPageSize()) > list.size() ? list.size() : (inicio + pageable.getPageSize());
+
+        try {
+            Page<T> page = new PageImpl<T>(list.subList(inicio, fin), pageable, list.size());
+            return page;
+        }catch(Exception ex){
+            return null;
         }
     }
+
+
+
+
+
+
+
+
+
 
 
 
