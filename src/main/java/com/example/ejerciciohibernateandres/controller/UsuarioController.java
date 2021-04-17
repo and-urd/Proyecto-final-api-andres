@@ -1,6 +1,6 @@
 package com.example.ejerciciohibernateandres.controller;
 
-import com.example.ejerciciohibernateandres.model.User;
+
 import com.example.ejerciciohibernateandres.model.Usuario;
 import com.example.ejerciciohibernateandres.service.UsuarioService;
 import org.springframework.data.web.PageableDefault;
