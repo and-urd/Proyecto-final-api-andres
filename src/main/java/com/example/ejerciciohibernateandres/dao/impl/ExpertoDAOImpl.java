@@ -6,6 +6,7 @@ import com.example.ejerciciohibernateandres.model.Experto;
 import com.example.ejerciciohibernateandres.service.ExpertoService;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -16,6 +17,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ExpertoDAOImpl implements ExpertoDAO {
@@ -27,7 +29,7 @@ public class ExpertoDAOImpl implements ExpertoDAO {
     private Session session;
 
     private final ExpertoService expertoService;
-    public ExpertoDAOImpl(ExpertoService expertoService) {
+    public ExpertoDAOImpl(@Lazy ExpertoService expertoService) { // @Lazy es para resolver al dependencia cíclica
         this.expertoService = expertoService;
     }
 
@@ -67,9 +69,23 @@ public class ExpertoDAOImpl implements ExpertoDAO {
             listaResultado.add(expertoService.encontrarExperto(experto.getId()).get());
         }
 
-
-
-
         return listaResultado;
     }
+
+    @Override
+    public void borrarEtiquetaDeExperto(Experto experto, Long id) {
+        // Recupero el experto de la BBDD
+        Optional<Experto> expertoBD = expertoService.encontrarExperto(experto.getId());
+
+        List<Etiqueta> listaEtiquetas = expertoBD.get().getEtiquetas();
+
+        listaEtiquetas.removeIf(s -> s.getId()==id);
+
+        expertoBD.get().setEtiquetas(listaEtiquetas);
+
+        expertoService.actualizarExperto(expertoBD.get());
+
+    }
+
+
 }
