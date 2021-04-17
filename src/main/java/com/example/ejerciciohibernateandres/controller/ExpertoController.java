@@ -31,7 +31,7 @@ public class ExpertoController {
     }
 
     // Crear Experto
-    @PostMapping("/experto")
+    @PostMapping("/expertos")
     public ResponseEntity<Experto> crearExperto(@RequestBody Experto experto){
         Experto expertoNuevo = expertoService.crearExperto(experto);
         if(expertoNuevo == null){
@@ -151,7 +151,7 @@ public class ExpertoController {
 
 
     // Encontrar un experto por su Id
-    @GetMapping("/experto/{id}")
+    @GetMapping("/expertos/{id}")
     public ResponseEntity<Optional<Experto>> encontrarUno(@PathVariable Long id){
         Optional<Experto> resultadoExperto = expertoService.encontrarExperto(id);
 
@@ -163,7 +163,7 @@ public class ExpertoController {
     }
 
     // Borrar un experto
-    @DeleteMapping("/experto/{id}")
+    @DeleteMapping("/expertos/{id}")
     public ResponseEntity<Boolean> borrarExperto(@PathVariable Long id){
 
         Boolean resultado = expertoService.borrarExperto(id);
@@ -197,7 +197,7 @@ public class ExpertoController {
 //    }
 
     // Actualizar un experto por su Id
-    @PutMapping("/experto/{id}")
+    @PutMapping("/expertos/{id}")
     public ResponseEntity<Experto> actualizarExpertoPorId(@RequestBody Experto experto, @PathVariable Long id){
         experto.setId(id);
 
