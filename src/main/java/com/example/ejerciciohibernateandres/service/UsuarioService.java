@@ -11,6 +11,9 @@ public interface UsuarioService {
     // Login
     Map<String, String> loginUsuario(Usuario usuario);
 
+    // Registro Usuario
+    Map<String, String> registroUsuario(Usuario usuario);
+
     // Crear Usuario
     Usuario crearUsuario(Usuario usuario);
 

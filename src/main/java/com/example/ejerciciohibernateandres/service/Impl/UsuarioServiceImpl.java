@@ -29,7 +29,15 @@ public class UsuarioServiceImpl implements UsuarioService {
             respuesta.put("error","Missing password");
             return respuesta;
         }
+    }
 
+    @Override
+    public Map<String, String> registroUsuario(Usuario usuario) {
+        Map<String, String> respuesta = new HashMap<>();
+        respuesta.put("id", "4");
+        respuesta.put("token","QpwL5tke4Pnpja7X4");
+
+        return respuesta;
     }
 
     @Override

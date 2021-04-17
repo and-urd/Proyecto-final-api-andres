@@ -34,6 +34,27 @@ public class UsuarioController {
         }
     }
 
+    // Registro de usuario
+    @PostMapping(value = "/usuario-registro")
+    public ResponseEntity<Map<String, String>> registroUsuario(@RequestBody Usuario usuario){
+        Map<String, String> respuesta = usuarioService.registroUsuario(usuario);
+
+        if(respuesta.containsKey("token")){
+            return ResponseEntity.ok().body(respuesta);
+        }else{
+            return ResponseEntity.badRequest().body(respuesta);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
     // Encontrar un usuario
     @GetMapping("/usuario/{id}")
     public ResponseEntity<Optional<Usuario>> encontrarUno(@PathVariable Long id){
