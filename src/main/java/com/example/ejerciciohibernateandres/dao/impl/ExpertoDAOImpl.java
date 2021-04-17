@@ -47,17 +47,16 @@ public class ExpertoDAOImpl implements ExpertoDAO {
 
         // Filtramos de la ´listaCriteria´ los expertos que tengan la etiqueta  `etiqueta` que buscamos.
         List<Experto> listafiltroEtiqueta = new ArrayList<>();
-        for (Experto experto :
-                listaCriteria) {
-            for (Etiqueta et :
-                    experto.getEtiquetas()) {
-                        if(etiqueta != 0) {
-                            if (et.getId() == etiqueta) listafiltroEtiqueta.add(experto);
-                        }else{
-                            // si no se ha introducido nada en el parámetro de filtro 'etiqueta'
-                            listafiltroEtiqueta.add(experto);
-                        }
-                    }
+
+        for (Experto experto : listaCriteria) {
+            if(etiqueta == 0){
+                listafiltroEtiqueta.add(experto);
+            }else{
+                for (Etiqueta et :
+                        experto.getEtiquetas()) {
+                    if (et.getId() == etiqueta) listafiltroEtiqueta.add(experto);
+                }
+            }
         }
 
 
