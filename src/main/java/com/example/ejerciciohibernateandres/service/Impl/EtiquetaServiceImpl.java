@@ -61,6 +61,7 @@ public class EtiquetaServiceImpl implements EtiquetaService {
         if(etiqueta.getId() != null && etiquetaRepository.existsById(etiqueta.getId())){
             return etiquetaRepository.save(etiqueta);
         }else{
+            log.error("ERROR actualizando Etiqueta: Puede que el id sea NULO, o que la etiqueta id={} no exista en BBDD", etiqueta.getId());
             return null;
         }
     }
@@ -100,12 +101,13 @@ public class EtiquetaServiceImpl implements EtiquetaService {
             try{
                 etiquetaRepository.deleteById(id);
             }catch (Exception ex){
-                log.info("Error en el borrado");
+                log.error("ERROR en el borrado de la etiqueta con id={}", id);
                 return false;
             }
 
             return true;
         }else{
+            log.error("ERROR en el borrado: La etiqueta con id={} no existe en BBDD", id);
             return false;
         }
     }
