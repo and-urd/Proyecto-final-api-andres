@@ -32,9 +32,10 @@ public class EtiquetaServiceImpl implements EtiquetaService {
     // Crear una etiqueta
     @Override
     public Etiqueta crearEtiqueta(Etiqueta etiqueta) {
-        if(etiqueta.getId() == null){
+        if(etiqueta.getId() == 0){
             return etiquetaRepository.save(etiqueta);
         }else{
+            log.error("ERROR creación de Etiqueta -> el `id` debe ser 0, pero su valor es id={}",etiqueta.getId());
             return null;
         }
     }
