@@ -3,6 +3,7 @@ package com.example.ejerciciohibernateandres.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,14 @@ public class Etiqueta {
 
     private String nombre;
 
+    private String creador;
+
+    @Column(name="createdat")
+    private LocalDate createAt;
+
+    @Column(name="updatedat")
+    private LocalDate updatedAt;
+
     @JsonIgnore
     @ManyToMany(mappedBy = "etiquetas", fetch = FetchType.EAGER)
     private List<Experto> expertos = new ArrayList<>();
@@ -25,8 +34,11 @@ public class Etiqueta {
     public Etiqueta() {
     }
 
-    public Etiqueta(String nombre) {
+    public Etiqueta(String nombre, String creador, LocalDate createAt, LocalDate updatedAt) {
         this.nombre = nombre;
+        this.creador = creador;
+        this.createAt = createAt;
+        this.updatedAt = updatedAt;
     }
 
     // Getter y setter
@@ -55,13 +67,40 @@ public class Etiqueta {
         this.expertos = expertos;
     }
 
-    // método toString
+    public String getCreador() {
+        return creador;
+    }
+
+    public void setCreador(String creador) {
+        this.creador = creador;
+    }
+
+    public LocalDate getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(LocalDate createAt) {
+        this.createAt = createAt;
+    }
+
+    public LocalDate getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDate updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+// método toString
+
 
     @Override
     public String toString() {
         return "Etiqueta{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
+                ", creador='" + creador + '\'' +
+                ", createAt=" + createAt +
+                ", updatedAt=" + updatedAt +
                 ", num_expertos=" + expertos.size() +
                 '}';
     }

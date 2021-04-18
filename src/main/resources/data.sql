@@ -22,9 +22,9 @@
 --INSERT INTO task_tag(id_task, id_tag) VALUES (2, 4);
 
 
-INSERT INTO etiquetas(id, nombre) VALUES (1, "php");
-INSERT INTO etiquetas(id, nombre) VALUES (2, "java");
-INSERT INTO etiquetas(id, nombre) VALUES (3, "kotlin");
+INSERT INTO etiquetas(id, nombre, creador, createdat) VALUES (1, "php", "", "2020/1/1");
+INSERT INTO etiquetas(id, nombre, creador, createdat) VALUES (2, "java", "", "2020/1/1");
+INSERT INTO etiquetas(id, nombre, creador, createdat) VALUES (3, "kotlin", "", "2020/1/1");
 
 INSERT INTO expertos(id, nombre, telefono, email, modalidad, estado) VALUES (1, "antonio", "666 111 111", "antonio@gmail.com", "online", "pendiente");
 INSERT INTO expertos(id, nombre, telefono, email, modalidad, estado) VALUES (2, "jose", "666 222 222", "jose@gmail.com", "presencial", "verificado");
