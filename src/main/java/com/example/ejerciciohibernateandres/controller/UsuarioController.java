@@ -4,6 +4,7 @@ package com.example.ejerciciohibernateandres.controller;
 import com.example.ejerciciohibernateandres.model.Usuario;
 import com.example.ejerciciohibernateandres.service.UsuarioService;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -27,8 +28,16 @@ public class UsuarioController {
     public ResponseEntity<Map<String, String>> loginUsuario(@RequestBody Usuario usuario){
         Map<String, String> respuesta = usuarioService.loginUsuario(usuario);
 
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.set("Access-Control-Allow-Origin", "*");
+        responseHeaders.set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        responseHeaders.set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+
+
         if(respuesta.containsKey("token")){
-            return ResponseEntity.ok().body(respuesta);
+            return ResponseEntity.ok()
+                                .headers(responseHeaders)
+                                .body(respuesta);
         }else{
             return ResponseEntity.badRequest().body(respuesta);
         }
