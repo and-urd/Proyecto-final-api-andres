@@ -50,7 +50,7 @@ public class ExpertoServiceImpl implements ExpertoService {
             return null;
         }
 
-        if(experto.getId() == null){
+        if(experto.getId() == 0){
             return expertoRepository.save(experto);
         }else {
             log.error("ERROR en Creación de Experto -> el Id debe ser nulo");
