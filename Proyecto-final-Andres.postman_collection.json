@@ -1,0 +1,835 @@
+{
+	"info": {
+		"_postman_id": "363ffc0d-d456-4008-b27f-5231d255be4e",
+		"name": "Proyecto-final-Andres",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "HEROKU",
+			"item": [
+				{
+					"name": "ETIQUETA",
+					"item": [
+						{
+							"name": "heroku buscar todas etiquetas",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://proyectofinalurda.herokuapp.com/api/etiquetas/?nombre=&page=0&size=10",
+									"protocol": "https",
+									"host": [
+										"proyectofinalurda",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"etiquetas",
+										""
+									],
+									"query": [
+										{
+											"key": "nombre",
+											"value": ""
+										},
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "heroku buscar por id etiqueta",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://proyectofinalurda.herokuapp.com/api/etiquetas/48",
+									"protocol": "https",
+									"host": [
+										"proyectofinalurda",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"etiquetas",
+										"48"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "heroku crear etiqueta",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 0,\r\n    \"nombre\": \"C++\",\r\n    \"creador\": \"Andres\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://proyectofinalurda.herokuapp.com/api/etiquetas",
+									"protocol": "https",
+									"host": [
+										"proyectofinalurda",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"etiquetas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "heroku actualizar etiqueta",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 0,\r\n    \"nombre\": \"Java\",\r\n    \"creador\": \"Andres\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://proyectofinalurda.herokuapp.com/api/etiquetas/48",
+									"protocol": "https",
+									"host": [
+										"proyectofinalurda",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"etiquetas",
+										"48"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "heroku borrar etiqueta",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://proyectofinalurda.herokuapp.com/api/etiquetas/63",
+									"protocol": "https",
+									"host": [
+										"proyectofinalurda",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"etiquetas",
+										"63"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "EXPERTO",
+					"item": [
+						{
+							"name": "heroku todos expertos",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://proyectofinalurda.herokuapp.com/api/expertos",
+									"protocol": "https",
+									"host": [
+										"proyectofinalurda",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"expertos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "heroku filtrado y paginado expertos",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://proyectofinalurda.herokuapp.com/api/expertos/?page=0&size=10&nombre=An&modalidad=&estado=Validado&etiqueta=0",
+									"protocol": "https",
+									"host": [
+										"proyectofinalurda",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"expertos",
+										""
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "nombre",
+											"value": "An"
+										},
+										{
+											"key": "modalidad",
+											"value": ""
+										},
+										{
+											"key": "estado",
+											"value": "Validado"
+										},
+										{
+											"key": "etiqueta",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "heroku experto Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://proyectofinalurda.herokuapp.com/api/expertos/43",
+									"protocol": "https",
+									"host": [
+										"proyectofinalurda",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"expertos",
+										"43"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "heroku crear experto",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"id\": 0,\r\n        \"nombre\": \"pedro\",\r\n        \"telefono\": \"666 888 333\",\r\n        \"email\": \"pedro@gmail.com\",\r\n        \"modalidad\": \"presencial\",\r\n        \"estado\": \"pendiente\",\r\n        \"etiquetas\": [\r\n        {\r\n            \"id\": 41,\r\n            \"nombre\": \"java\"\r\n        },\r\n        {\r\n            \"id\": 44,\r\n            \"nombre\": \"kotlin\"\r\n        }\r\n    ]\r\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://proyectofinalurda.herokuapp.com/api/expertos",
+									"protocol": "https",
+									"host": [
+										"proyectofinalurda",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"expertos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "heroku actualizar experto por Id",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 0,\r\n    \"nombre\": \"ANTONIO\",\r\n    \"telefono\": \"666 888 333\",\r\n    \"email\": \"ANTONIO@gmail.com\",\r\n        \"etiquetas\": [\r\n        {\r\n            \"id\": 44,\r\n            \"nombre\": \"php\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://proyectofinalurda.herokuapp.com/api/expertos/43",
+									"protocol": "https",
+									"host": [
+										"proyectofinalurda",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"expertos",
+										"43"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "heroku borrar experto por Id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://proyectofinalurda.herokuapp.com/api/expertos/50",
+									"protocol": "https",
+									"host": [
+										"proyectofinalurda",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"expertos",
+										"50"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "USUARIO",
+					"item": [
+						{
+							"name": "heroku crear usuario",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 0,\r\n    \"email\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://proyectofinalurda.herokuapp.com/api/usuario",
+									"protocol": "https",
+									"host": [
+										"proyectofinalurda",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"usuario"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "heroku login usuario",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"admin\",\r\n    \"password\": \"admin\",\r\n    \"passwordRepetido\":null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://proyectofinalurda.herokuapp.com/api/usuario-login",
+									"protocol": "https",
+									"host": [
+										"proyectofinalurda",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"usuario-login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "heroku registro usuario",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://proyectofinalurda.herokuapp.com/api/usuario-registro",
+									"protocol": "https",
+									"host": [
+										"proyectofinalurda",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"usuario-registro"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "LOCAL",
+			"item": [
+				{
+					"name": "Etiqueta",
+					"item": [
+						{
+							"name": "Encontrar etiquetas",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/etiquetas/?nombre=&page=0&size=10",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"etiquetas",
+										""
+									],
+									"query": [
+										{
+											"key": "nombre",
+											"value": ""
+										},
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Encontrar etiqueta por Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/etiquetas/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"etiquetas",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Crear etiqueta",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "            {\r\n                \"id\": 0,\r\n                \"nombre\": \"C++\"\r\n            }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/etiquetas",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"etiquetas"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Actualizar Etiqueta por ID",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "    {\r\n        \"id\": null,\r\n        \"nombre\": \"C#\"\r\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/etiquetas/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"etiquetas",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Borrar etiqueta",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/etiquetas/4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"etiquetas",
+										"4"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Experto",
+					"item": [
+						{
+							"name": "Encontrar todos expertos",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/expertos",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"expertos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Encontrar experto paginado",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/expertos/?page=0&size=10&nombre=jose&modalidad=presencial&estado=verificado&etiqueta=3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"expertos",
+										""
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "nombre",
+											"value": "jose"
+										},
+										{
+											"key": "modalidad",
+											"value": "presencial"
+										},
+										{
+											"key": "estado",
+											"value": "verificado"
+										},
+										{
+											"key": "etiqueta",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Encontrar experto Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/expertos/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"expertos",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Crear experto",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"id\": 0,\r\n        \"nombre\": \"pedro\",\r\n        \"telefono\": \"666 888 333\",\r\n        \"email\": \"pedro@gmail.com\",\r\n        \"modalidad\": \"presencial\",\r\n        \"estado\": \"pendiente\",\r\n        \"etiquetas\": [\r\n        {\r\n            \"id\": 2,\r\n            \"nombre\": \"java\"\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"nombre\": \"kotlin\"\r\n        }\r\n    ]\r\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/expertos",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"expertos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Actualizar Experto",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": null,\r\n    \"nombre\": \"ANTONIO\",\r\n    \"telefono\": \"666 888 333\",\r\n    \"email\": \"ANTONIO@gmail.com\",\r\n        \"etiquetas\": [\r\n        {\r\n            \"id\": 1,\r\n            \"nombre\": \"php\"\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/expertos/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"expertos",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Borrar experto",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/expertos/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"expertos",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Usuario",
+					"item": [
+						{
+							"name": "Usuario login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/usuario-login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"usuario-login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Encontrar usuario",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/api/usuario/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"usuario",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Usuario registro",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/usuario-registro",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"usuario-registro"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
